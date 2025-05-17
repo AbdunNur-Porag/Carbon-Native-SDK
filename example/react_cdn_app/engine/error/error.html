@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error</title>
+    <script src="file:///android_asset/app.js"></script>
+    <link rel="stylesheet" href="engine/css/beer.min.css">
+    <script src="engine/react/react.development.js"></script>
+    <script src="engine/react/react-dom.development.js"></script>
+    <script src="engine/UIVE/router.js"></script>
+    <script type="text/babel" src="engine/UIVE/skeleton.js"></script>
+    <script src="engine/react/babel.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #00bfa5;
+            --secondary-color: #6200ea;
+            --background-color: #e3f2fd;
+            --error-color: #d50000;
+            --text-color: #212121;
+            --card-color: #ffffff;
+            --toolbar-color: #512da8;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: var(--background-color);
+        }
+
+        .toolbar {
+            background-color: var(--toolbar-color);
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 64px);
+            padding: 20px;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            padding: 26px;
+            width: 95%;
+            max-width: 420px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+        }
+
+        .title {
+            font-size: 22px;
+            color: var(--error-color);
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            text-align: center;
+            color: #555;
+            margin-bottom: 22px;
+        }
+
+        .info {
+            font-size: 14px;
+            margin: 6px 0;
+            color: var(--text-color);
+        }
+
+        .info strong {
+            color: var(--secondary-color);
+            display: inline-block;
+            width: 130px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 191, 165, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #00a891;
+        }
+    </style>
+</head>
+
+<body onload="OnStart()">
+
+    <div class="toolbar">System Crash Report</div>
+
+    <div class="container">
+        <div class="card">
+            <div class="title">Critical Error</div>
+            <div class="subtitle">The application crashed unexpectedly.</div>
+
+            <div class="info"><strong>Error ID:</strong> #ERR_982134</div>
+            <div class="info"><strong>Timestamp:</strong> <span id="time"></span></div>
+            <div class="info"><strong>Version:</strong> 1.2.3</div>
+            <div class="info"><strong>Load:</strong> FAILED</div>
+            <div class="info"><strong>Debug:</strong> true</div>
+            <div class="info"><strong>UiKit:</strong> engine.carbonMatUiKit.cn5</div>
+            <div class="info"><strong>Trace:</strong> UIManager.init() crash</div>
+
+            <div class="info"><strong>Device ID:</strong> <span id="deviceId">Loading...</span></div>
+            <div class="info"><strong>OS Version:</strong> <span id="osVersion">Loading...</span></div>
+        
+            <div class="info"><strong>Battery Level:</strong> <span id="battery">Loading...</span>%</div>
+
+            <div class="button-container">
+                <button class="btn" onclick="resetart()">Restart App</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function OnStart() {
+            document.getElementById("time").textContent = new Date().toLocaleString();
+
+            try {
+                document.getElementById("deviceId").textContent = app.GetDeviceId();
+                document.getElementById("osVersion").textContent = app.GetOSVersion();
+               // document.getElementById("envPath").textContent = app.GetEnv("PATH");
+                document.getElementById("battery").textContent = app.GetBatteryLevel();
+            } catch (e) {
+                document.getElementById("deviceId").textContent = "Unavailable";
+                document.getElementById("osVersion").textContent = "Unavailable";
+                document.getElementById("envPath").textContent = "Unavailable";
+                document.getElementById("battery").textContent = "Unavailable";
+            }
+        }
+
+        function resetart() {
+            var apps = app.GetRunningApps();
+            var curApps = apps.filter(function(v) { return v.foreground; });
+            var pid = curApps[0].pid;
+            app.KillApp(pid);
+        }
+    </script>
+
+</body>
+</html>

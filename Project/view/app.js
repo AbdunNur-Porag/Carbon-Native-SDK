@@ -1,0 +1,217 @@
+animation.config({
+  fade: `
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #f8f8f8;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 600px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #ededed 25%, #fafafa 50%, #ededed 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite linear;
+      border-radius: 8px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    .skeleton.title {
+      width: 60%;
+      height: 24px;
+      margin: 0 auto 24px;
+    }
+
+    .skeleton.text {
+      width: 100%;
+      height: 16px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
+
+  <div class="card">
+    <div class="skeleton title"></div>
+    <div class="skeleton text"></div>
+    <div class="skeleton text"></div>
+    <div class="skeleton text"></div>
+  </div>
+  `,
+
+  slide: () => `
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #f8f8f8;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 600px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #ededed 25%, #fafafa 50%, #ededed 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite linear;
+      border-radius: 8px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    .skeleton.title {
+      width: 60%;
+      height: 24px;
+      margin: 0 auto 24px;
+    }
+
+    .skeleton.text {
+      width: 100%;
+      height: 16px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
+
+  <div class="card">
+    <div class="skeleton title"></div>
+    <div class="skeleton text"></div>
+    <div class="skeleton text"></div>
+    <div class="skeleton text"></div>
+  </div>
+  `
+});
+const containerStyle = {
+  height: "100vh",
+  //display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  //padding: "20px",
+  boxSizing: "border-box"
+};
+
+const cardStyle = {
+  width: "90%",
+  maxWidth: "600px",
+  background: "#ffffff",
+  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+  borderRadius: "12px",
+  padding: "30px 20px",
+  textAlign: "center"
+};
+
+function MainActivity() {
+  return (
+    <div style={containerStyle}>
+<header className="transparent large"><nav className="top transparent">
+  <button  data-ui="#appDrawer"className="ripple transparent circle">
+  <i>menu</i>
+</button>
+<div className="max"></div>
+<button className="ripple transparent circle">
+  <i>home</i>
+</button>
+<button className="ripple transparent circle">
+  <i>star</i>
+  
+</button>
+<button className="ripple transparent circle">
+  <i>history</i>
+</button>
+<button className="ripple transparent circle">
+  <i>more_vert</i>
+</button>
+
+
+
+
+</nav>
+{/*left*/}
+ </header>
+  {/*body*/}
+  <nav className="row padding"
+  style={{
+  width:"100%",
+  position:"",
+  }}>
+    <input className="responsive"type="search"
+    placeholder="বাংলায় লিখুন"
+    style={{
+      width:"60%",
+      height:"40px",
+      border:"none",
+      borderRadius:"20px",
+      outline:"none",
+      backgroundColor:"#C3C3C3",
+      fontSize:"17px",
+      padding:"20px"
+      
+    }}/>
+
+
+<button className="transparent ripple">
+  <i>search</i>
+</button>
+</nav>
+<div style={{
+  width:"90%"
+}} className="padding">
+  <h5>বাংলা অভিধান</h5>
+  <p>এটি Carbon Native দ্বারা ততৈরি করা হয়েছে।</p>
+</div>
+<dialog style={{
+  backgroundColor:"#f8f8f8"
+}} className="left"id="appDrawer">
+  
+</dialog>
+    </div>
+    //ex
+  );
+}
+function ErrorPage(){
+  return (
+    <div>
+      <h4>No Page Found</h4>
+    </div>
+  )
+}
+router.config({
+  default: <MainActivity />,
+  "": <MainActivity />,
+  main: <MainActivity />,
+  //docs: <DocumentationActivity />,
+  //about: <AboutActivity />,
+  notfound: <ErrorPage />
+});
