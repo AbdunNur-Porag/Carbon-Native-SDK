@@ -18,7 +18,7 @@
 
 ### **১. প্রাথমিক প্রস্তুতি**
 
-- GitHub থেকে এই [git রিপোজিটরি ডাউনলোড করুন](https://github.com/something)।
+- GitHub থেকে এই [git রিপোজিটরি ডাউনলোড করুন](https://github.com/AbdunNur-Porag/Carbon-Native-SDK)।
 - ফাইলটি **unzip** করুন।
 - unzip করার পর এমন দেখাবে
 ![file](/img/project.png)
