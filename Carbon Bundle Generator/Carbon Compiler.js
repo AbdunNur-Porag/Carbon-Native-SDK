@@ -62,7 +62,13 @@ function OnStart() {
         }
 
         var buildPath = folderPath + "/build";
-        if (!app.FolderExists(buildPath)) app.MakeFolder(buildPath);
+        if (!app.FolderExists(buildPath))
+        app.MakeFolder(buildPath);
+        mainBundleFolder=buildPath+"/main"
+        rawBundleFolder=buildPath+"/raw"
+        app.MakeFolder(mainBundleFolder)
+        app.MakeFolder(rawBundleFolder)
+        
 
         var crypt = app.CreateCrypt();
 
@@ -72,8 +78,8 @@ function OnStart() {
 
             var encryptedData = crypt.Encrypt(activityData, encKey);
 
-            var versionBundlePath = buildPath + "/carbon.main.bundle." + version;
-            var versionRawPath = buildPath + "/carbon.main.bundle.raw." + version;
+            var versionBundlePath = mainBundleFolder+ "/carbon.main.bundle." + version;
+            var versionRawPath = rawBundleFolder+ "/carbon.main.bundle.raw." + version;
 
             if (app.FileExists(versionBundlePath)) app.DeleteFile(versionBundlePath);
             if (app.FileExists(versionRawPath)) app.DeleteFile(versionRawPath);
@@ -85,3 +91,10 @@ function OnStart() {
         resultText.SetText("Files processed successfully for Android versions: " + osVersionList.join(", "));
     });
 }
+
+/*
+update:
+mainBundlePath:added
+rawBundlePath:added
+
+*/
